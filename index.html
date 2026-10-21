@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bold Text Generator – Write in Bold Text | Free Unicode Bold Fonts</title>
+<meta name="description" content="Free bold text generator. Convert any text to bold, italic, serif bold, sans-serif bold, and more Unicode styles instantly. Copy and paste bold text for Instagram, Facebook, Twitter and more.">
+
+<!-- Preconnect for Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- font-display:swap for performance -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<!--
+  ============================================================
+  WORDPRESS / KADENCE THEME INTEGRATION NOTES
+  ============================================================
+  1. This file is a standalone HTML page. To use in WordPress:
+     - Create a new Page in WP Admin
+     - Set the Kadence page template to "Blank Canvas" or "No Header/Footer"
+       so Kadence doesn't inject its own nav/header on top
+     - Paste the content between <body>...</body> into a Custom HTML block
+     - OR use a Full-Width page template and embed via an HTML block
+  2. CSS Variables are scoped to .btg-wrap — safe from Kadence theme conflicts
+  3. All classes use .btg- prefix to avoid collisions with Kadence/WP styles
+  4. Google Fonts: If Kadence already loads Inter, remove the font link above
+  5. Schema markup (JSON-LD) is included at the bottom for SEO
+  6. Images use inline SVG — zero external HTTP requests, renders instantly
+  ============================================================
+-->
+
+<style>
+/* ============================================================
+   RESET & SCOPE — all styles scoped to .btg-wrap
+   prevents conflicts with Kadence theme global styles
+   ============================================================ */
+.btg-wrap *,.btg-wrap *::before,.btg-wrap *::after{box-sizing:border-box;margin:0;padding:0}
+.btg-wrap{
+  --c-black:#0f0f0f;
+  --c-white:#ffffff;
+  --c-off:#f7f6f3;
+  --c-g50:#f2f1ee;
+  --c-g100:#e8e5e0;
+  --c-g200:#d4cfc8;
+  --c-g400:#9e9690;
+  --c-g500:#78706a;
+  --c-g700:#3a3530;
+  --c-accent:#e85a2a;
+  --c-accent-lt:#f07848;
+  --c-accent-pale:#fdf0eb;
+  --c-gold:#c9a84c;
+  --r-sm:8px; --r-md:14px; --r-lg:20px; --r-xl:28px; --r-full:999px;
+  font-family:'Inter',system-ui,sans-serif;
+  color:var(--c-black);
+  background:var(--c-white);
+  line-height:1.6;
+  overflow-x:hidden;
+}
+.btg-wrap h1,.btg-wrap h2,.btg-wrap h3,.btg-wrap h4{
+  font-family:'Inter',system-ui,sans-serif;
+  line-height:1.1;
+  font-weight:800;
+}
+
+/* ---- NAV ---- */
+.btg-nav{
+  position:sticky;top:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 40px;
+  background:rgba(255,255,255,.95);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--c-g100);
+  will-change:transform;
+}
+.btg-logo{
+  font-weight:900;font-size:18px;letter-spacing:-.5px;
+  color:var(--c-black);text-decoration:none;
+  display:flex;align-items:center;gap:9px;
+}
+.btg-logo-icon{
+  width:32px;height:32px;background:var(--c-black);border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:15px;color:#fff;font-weight:900;
+}
+.btg-nav-links{display:flex;gap:24px;list-style:none;}
+.btg-nav-links a{
+  text-decoration:none;color:var(--c-g500);font-size:14px;font-weight:500;
+  transition:color .15s;
+}
+.btg-nav-links a:hover{color:var(--c-black)}
+.btg-nav-btn{
+  background:var(--c-accent);color:#fff;border:none;
+  border-radius:var(--r-full);padding:9px 20px;
+  font-size:13px;font-weight:700;cursor:pointer;
+  transition:background .15s;
+}
+.btg-nav-btn:hover{background:var(--c-accent-lt)}
+
+/* ---- HERO — tool embedded above the fold ---- */
+.btg-hero{
+  padding:56px 40px 0;
+  background:var(--c-white);
+  position:relative;overflow:hidden;
+}
+.btg-hero-inner{
+  max-width:1140px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:60px;align-items:start;
+}
+/* Left: headline + tool */
+.btg-hero-left{}
+.btg-eyebrow{
+  display:inline-flex;align-items:center;gap:7px;
+  background:var(--c-g50);border:1px solid var(--c-g100);
+  border-radius:var(--r-full);padding:5px 14px 5px 7px;
+  font-size:11px;font-weight:700;letter-spacing:.5px;
+  text-transform:uppercase;color:var(--c-g500);
+  margin-bottom:20px;
+}
+.btg-eyebrow-dot{width:7px;height:7px;background:var(--c-accent);border-radius:50%;}
+.btg-hero h1{
+  font-size:clamp(28px,3.8vw,52px);
+  font-weight:900;letter-spacing:-2px;line-height:1;
+  margin-bottom:14px;
+}
+.btg-hero-sub{
+  font-size:16px;color:var(--c-g500);line-height:1.7;
+  margin-bottom:28px;max-width:480px;
+}
+/* Right: decorative SVG illustration */
+.btg-hero-right{
+  display:flex;align-items:center;justify-content:center;
+  padding-top:12px;
+}
+.btg-hero-right svg{width:100%;max-width:480px;height:auto;}
+
+/* ---- TOOL CARD (inline in hero) ---- */
+.btg-tool-card{
+  background:#fff;
+  border:1.5px solid var(--c-g100);
+  border-radius:var(--r-xl);
+  box-shadow:0 4px 32px rgba(0,0,0,.06);
+  overflow:hidden;
+  margin-bottom:0;
+}
+.btg-tool-input{
+  padding:24px 28px 20px;
+  border-bottom:1px solid var(--c-g100);
+  position:relative;
+}
+.btg-input-label{
+  font-size:10px;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--c-g400);
+  margin-bottom:10px;display:flex;align-items:center;gap:6px;
+}
+.btg-textarea{
+  width:100%;min-height:90px;border:none;outline:none;
+  resize:none;font-family:inherit;font-size:17px;
+  color:var(--c-black);line-height:1.65;background:transparent;
+}
+.btg-textarea::placeholder{color:var(--c-g200);font-style:italic}
+.btg-char{
+  position:absolute;bottom:10px;right:28px;
+  font-size:11px;color:var(--c-g400);font-weight:500;
+}
+.btg-filters{
+  padding:10px 28px;
+  display:flex;align-items:center;gap:6px;flex-wrap:wrap;
+  background:var(--c-g50);
+  border-bottom:1px solid var(--c-g100);
+}
+.btg-flabel{
+  font-size:10px;font-weight:700;letter-spacing:1px;
+  text-transform:uppercase;color:var(--c-g400);margin-right:4px;
+}
+.btg-fbtn{
+  padding:5px 13px;border-radius:var(--r-full);
+  border:1.5px solid var(--c-g200);background:#fff;
+  font-size:12px;font-weight:600;cursor:pointer;
+  color:var(--c-g500);font-family:inherit;transition:all .12s;
+}
+.btg-fbtn:hover{border-color:var(--c-black);color:var(--c-black)}
+.btg-fbtn.active{background:var(--c-black);color:#fff;border-color:var(--c-black)}
+.btg-results{padding:20px 28px}
+.btg-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:12px;
+  max-height:380px;overflow-y:auto;
+  scrollbar-width:thin;scrollbar-color:var(--c-g200) transparent;
+}
+.btg-grid::-webkit-scrollbar{width:4px}
+.btg-grid::-webkit-scrollbar-thumb{background:var(--c-g200);border-radius:4px}
+.btg-card{
+  background:var(--c-off);border:1.5px solid var(--c-g100);
+  border-radius:var(--r-lg);padding:18px;
+  cursor:pointer;transition:all .15s;
+  position:relative;overflow:hidden;
+}
+.btg-card:hover{border-color:var(--c-accent);transform:translateY(-1px);box-shadow:0 4px 16px rgba(232,90,42,.1)}
+.btg-card.copied{border-color:#22c55e;background:rgba(34,197,94,.05)}
+.btg-card-label{
+  font-size:9px;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--c-g400);margin-bottom:8px;
+}
+.btg-card-text{
+  font-size:18px;line-height:1.4;color:var(--c-black);
+  word-break:break-word;min-height:28px;
+}
+.btg-card-text.empty{color:var(--c-g200);font-style:italic;font-size:13px}
+.btg-card-foot{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:12px;
+}
+.btg-badge{
+  font-size:9px;font-weight:700;letter-spacing:1px;
+  text-transform:uppercase;padding:2px 8px;
+  border-radius:var(--r-full);background:var(--c-g100);color:var(--c-g500);
+}
+.btg-copy{
+  display:flex;align-items:center;gap:4px;padding:5px 11px;
+  border-radius:var(--r-full);border:1.5px solid var(--c-g200);
+  background:#fff;font-size:11px;font-weight:700;cursor:pointer;
+  color:var(--c-g500);font-family:inherit;transition:all .12s;
+}
+.btg-copy:hover{background:var(--c-black);color:#fff;border-color:var(--c-black)}
+.btg-copy.copied{background:#22c55e;color:#fff;border-color:#22c55e}
+
+/* ---- TICKER ---- */
+.btg-ticker{
+  padding:22px 0;overflow:hidden;background:var(--c-black);
+  /* contain paint for perf */
+  contain:strict;
+}
+.btg-ticker-track{
+  display:flex;gap:40px;width:max-content;
+  animation:btgTicker 28s linear infinite;
+  will-change:transform;
+}
+.btg-ticker-track:hover{animation-play-state:paused}
+@keyframes btgTicker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.btg-tick-item{font-size:20px;white-space:nowrap;color:rgba(255,255,255,.2);transition:color .2s}
+.btg-tick-item:hover{color:rgba(255,255,255,.75)}
+.btg-tick-item.hi{color:rgba(232,90,42,.6)}
+
+/* ---- CONTENT SECTIONS (two-column: text left, SVG right or vice versa) ---- */
+.btg-sections{background:var(--c-white)}
+.btg-section{
+  max-width:1140px;margin:0 auto;
+  padding:72px 40px;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:64px;align-items:center;
+  border-bottom:1px solid var(--c-g100);
+}
+.btg-section:last-child{border-bottom:none}
+.btg-section.reverse{direction:rtl}
+.btg-section.reverse>*{direction:ltr}
+/* full-width variant */
+.btg-section.full{grid-template-columns:1fr;max-width:900px;padding:72px 40px}
+.btg-sec-img{display:flex;align-items:center;justify-content:center;}
+.btg-sec-img svg{width:100%;max-width:420px;height:auto}
+.btg-sec-tag{
+  display:inline-block;
+  font-size:10px;font-weight:700;letter-spacing:2px;
+  text-transform:uppercase;color:var(--c-accent);
+  margin-bottom:10px;
+}
+.btg-sec-h2{
+  font-size:clamp(22px,2.8vw,36px);font-weight:800;
+  letter-spacing:-1px;margin-bottom:16px;line-height:1.1;
+}
+.btg-sec-p{font-size:15.5px;color:var(--c-g500);line-height:1.75;margin-bottom:14px}
+.btg-sec-p:last-child{margin-bottom:0}
+
+/* steps inside section */
+.btg-steps{display:flex;flex-direction:column;gap:0;}
+.btg-step{
+  display:flex;gap:18px;padding:20px 0;
+  border-bottom:1px solid var(--c-g100);
+}
+.btg-step:last-child{border-bottom:none}
+.btg-step-num{
+  width:38px;height:38px;border-radius:50%;
+  background:var(--c-g50);border:1.5px solid var(--c-g200);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:14px;color:var(--c-g500);
+  flex-shrink:0;transition:all .15s;
+}
+.btg-step:hover .btg-step-num{background:var(--c-black);color:#fff;border-color:var(--c-black)}
+.btg-step-body h3{font-size:16px;font-weight:700;margin-bottom:4px}
+.btg-step-body p{font-size:14px;color:var(--c-g500);line-height:1.65}
+
+/* use-case cards grid */
+.btg-platforms{
+  display:grid;grid-template-columns:1fr 1fr;gap:14px;
+  grid-column:1/-1;margin-top:8px;
+}
+.btg-plat{border-radius:var(--r-lg);padding:28px;transition:transform .2s}
+.btg-plat:hover{transform:translateY(-3px)}
+.btg-plat.dark{background:var(--c-black);color:#fff}
+.btg-plat.peach{background:var(--c-accent-pale);border:1px solid rgba(232,90,42,.15)}
+.btg-plat.warm{background:#fdf6e8;border:1px solid rgba(201,168,76,.2)}
+.btg-plat.neutral{background:var(--c-off);border:1px solid var(--c-g100)}
+.btg-plat-icon{font-size:30px;margin-bottom:14px}
+.btg-plat h3{font-size:18px;font-weight:800;margin-bottom:8px;letter-spacing:-.3px}
+.btg-plat.dark h3{color:#fff}
+.btg-plat p{font-size:14px;line-height:1.65;color:var(--c-g500)}
+.btg-plat.dark p{color:rgba(255,255,255,.5)}
+
+/* styles grid */
+.btg-styles-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:16px;grid-column:1/-1;margin-top:8px;
+}
+.btg-style-card{
+  background:#fff;border:1.5px solid var(--c-g100);
+  border-radius:var(--r-lg);padding:24px;
+  transition:all .2s;position:relative;overflow:hidden;
+}
+.btg-style-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--c-accent),var(--c-gold));
+  transform:scaleX(0);transform-origin:left;transition:transform .25s;
+}
+.btg-style-card:hover{box-shadow:0 8px 32px rgba(0,0,0,.07);transform:translateY(-3px)}
+.btg-style-card:hover::after{transform:scaleX(1)}
+.btg-sc-icon{font-size:24px;margin-bottom:12px}
+.btg-sc-name{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--c-accent);margin-bottom:6px}
+.btg-sc-preview{font-size:22px;color:var(--c-black);margin-bottom:8px}
+.btg-sc-desc{font-size:13px;color:var(--c-g500);line-height:1.55}
+.btg-sc-example{margin-top:12px;padding-top:12px;border-top:1px solid var(--c-g100)}
+.btg-sc-ex-label{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--c-g400);margin-bottom:4px}
+
+/* stats bar */
+.btg-stats{
+  padding:60px 40px;background:var(--c-black);
+}
+.btg-stats-inner{
+  max-width:1000px;margin:0 auto;
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:rgba(255,255,255,.07);
+  border-radius:var(--r-xl);overflow:hidden;
+}
+.btg-stat{padding:36px 24px;background:var(--c-black);text-align:center}
+.btg-stat-n{font-size:46px;font-weight:900;color:#fff;line-height:1;letter-spacing:-2px;margin-bottom:6px}
+.btg-stat-n span{color:var(--c-accent)}
+.btg-stat-l{font-size:12px;color:rgba(255,255,255,.4);font-weight:500}
+
+/* FAQ */
+.btg-faq{padding:72px 40px;background:var(--c-off)}
+.btg-faq-inner{max-width:760px;margin:0 auto}
+.btg-faq-tag{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--c-accent);margin-bottom:8px}
+.btg-faq-h2{font-size:clamp(24px,3vw,38px);font-weight:800;letter-spacing:-1px;margin-bottom:40px}
+.btg-faq-item{border-bottom:1px solid var(--c-g100);overflow:hidden}
+.btg-faq-q{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 0;cursor:pointer;
+  font-weight:700;font-size:16px;
+  user-select:none;transition:color .15s;
+}
+.btg-faq-q:hover{color:var(--c-accent)}
+.btg-faq-icon{font-size:20px;transition:transform .3s;color:var(--c-g400);flex-shrink:0;margin-left:12px}
+.btg-faq-item.open .btg-faq-icon{transform:rotate(45deg);color:var(--c-accent)}
+.btg-faq-a{
+  max-height:0;overflow:hidden;
+  transition:max-height .35s ease,padding-bottom .25s;
+  font-size:15px;color:var(--c-g500);line-height:1.75;padding-bottom:0;
+}
+.btg-faq-item.open .btg-faq-a{max-height:300px;padding-bottom:20px}
+
+/* CTA */
+.btg-cta{padding:72px 40px;background:#fff;text-align:center}
+.btg-cta-inner{max-width:640px;margin:0 auto}
+.btg-cta-h2{font-size:clamp(28px,4vw,52px);font-weight:900;letter-spacing:-2px;line-height:1;margin-bottom:14px}
+.btg-cta-p{font-size:17px;color:var(--c-g500);margin-bottom:28px;line-height:1.65}
+.btg-cta-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--c-accent);color:#fff;
+  border-radius:var(--r-full);padding:16px 36px;
+  font-size:16px;font-weight:800;cursor:pointer;border:none;
+  font-family:inherit;letter-spacing:-.3px;transition:background .15s;
+}
+.btg-cta-btn:hover{background:var(--c-accent-lt)}
+
+/* Footer */
+.btg-footer{background:var(--c-black);color:#fff;padding:48px 40px 32px}
+.btg-footer-top{
+  max-width:1100px;margin:0 auto;
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:40px;padding-bottom:40px;
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+.btg-footer-logo{
+  font-weight:900;font-size:20px;color:#fff;
+  margin-bottom:10px;display:block;text-decoration:none;
+}
+.btg-footer-brand p{font-size:13px;color:rgba(255,255,255,.4);line-height:1.65;max-width:240px;margin-bottom:16px}
+.btg-footer-col h5{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:14px}
+.btg-footer-col a{display:block;color:rgba(255,255,255,.55);text-decoration:none;font-size:13px;margin-bottom:8px;transition:color .15s}
+.btg-footer-col a:hover{color:#fff}
+.btg-footer-bottom{
+  max-width:1100px;margin:20px auto 0;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;
+}
+.btg-footer-bottom p{font-size:12px;color:rgba(255,255,255,.3)}
+.btg-footer-bottom a{color:rgba(255,255,255,.3);text-decoration:none;font-size:12px;margin-left:14px;transition:color .15s}
+.btg-footer-bottom a:hover{color:rgba(255,255,255,.7)}
+
+/* TOAST */
+.btg-toast{
+  position:fixed;bottom:28px;right:28px;z-index:9999;
+  background:var(--c-black);color:#fff;
+  border-radius:var(--r-md);padding:12px 20px;
+  font-size:13px;font-weight:600;
+  box-shadow:0 6px 24px rgba(0,0,0,.18);
+  transform:translateY(16px);opacity:0;
+  transition:all .25s ease;pointer-events:none;
+  display:flex;align-items:center;gap:8px;
+}
+.btg-toast.show{transform:translateY(0);opacity:1}
+.btg-toast-dot{width:7px;height:7px;background:#22c55e;border-radius:50%}
+
+/* REVEAL */
+.btg-reveal{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease}
+.btg-reveal.vis{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  .btg-nav{padding:12px 20px}.btg-nav-links{display:none}
+  .btg-hero{padding:40px 20px 0}
+  .btg-hero-inner{grid-template-columns:1fr;gap:32px}
+  .btg-hero-right{display:none}
+  .btg-section{grid-template-columns:1fr;gap:32px;padding:52px 20px}
+  .btg-section.reverse{direction:ltr}
+  .btg-sec-img{display:none}
+  .btg-platforms{grid-template-columns:1fr}
+  .btg-styles-grid{grid-template-columns:1fr 1fr}
+  .btg-stats-inner{grid-template-columns:1fr 1fr}
+  .btg-footer-top{grid-template-columns:1fr 1fr;gap:28px}
+  .btg-faq,.btg-cta,.btg-stats{padding-left:20px;padding-right:20px}
+}
+@media(max-width:580px){
+  .btg-styles-grid{grid-template-columns:1fr}
+  .btg-grid{grid-template-columns:1fr;max-height:none}
+  .btg-footer-top{grid-template-columns:1fr}
+  .btg-stats-inner{grid-template-columns:1fr 1fr}
+}
+
+/* Reduce motion */
+@media(prefers-reduced-motion:reduce){
+  .btg-reveal{opacity:1;transform:none;transition:none}
+  .btg-ticker-track{animation:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== WRAPPER — scopes all styles, Kadence-safe ===== -->
+<div class="btg-wrap" id="btg-wrap">
+
+<div class="btg-toast" id="btgToast"><div class="btg-toast-dot"></div><span id="btgToastMsg">Copied!</span></div>
+
+<!-- NAV -->
+<nav class="btg-nav" id="btgNav" aria-label="Main navigation">
+  <a href="#" class="btg-logo" aria-label="BoldGen home">
+    <div class="btg-logo-icon" aria-hidden="true">𝐁</div>
+    BoldGen
+  </a>
+  <ul class="btg-nav-links" role="list">
+    <li><a href="#btg-how">How It Works</a></li>
+    <li><a href="#btg-where">Where to Use</a></li>
+    <li><a href="#btg-styles">All Styles</a></li>
+    <li><a href="#btg-faq">FAQ</a></li>
+  </ul>
+  <button class="btg-nav-btn" onclick="document.getElementById('btgInput').focus()">Try Free →</button>
+</nav>
+
+<!-- ===================================================
+     HERO — H1 + TOOL above the fold
+     =================================================== -->
+<section class="btg-hero" aria-labelledby="btg-h1">
+  <div class="btg-hero-inner">
+
+    <!-- LEFT: headline + embedded tool -->
+    <div class="btg-hero-left">
+      <div class="btg-eyebrow" aria-label="Tool features">
+        <span class="btg-eyebrow-dot" aria-hidden="true"></span>
+        Free &middot; Instant &middot; No signup
+      </div>
+
+      <h1 id="btg-h1">𝐁𝐨𝐥𝐝 𝐓𝐞𝐱𝐭 𝐆𝐞𝐧𝐞𝐫𝐚𝐭𝐨𝐫 &ndash; Write in Bold Text</h1>
+      <p class="btg-hero-sub">Convert any text to Unicode bold styles instantly &mdash; copy &amp; paste into Instagram, Facebook, Twitter, WhatsApp and anywhere formatting gets stripped.</p>
+
+      <!-- TOOL CARD — embedded in hero for above-the-fold conversion -->
+      <div class="btg-tool-card" id="btg-tool" role="main" aria-label="Bold text generator tool">
+        <div class="btg-tool-input">
+          <div class="btg-input-label" aria-hidden="true">✏ Your Text</div>
+          <textarea
+            class="btg-textarea"
+            id="btgInput"
+            placeholder="Type or paste text here… e.g. Hello World"
+            oninput="btgConvert()"
+            rows="4"
+            maxlength="500"
+            aria-label="Enter text to convert to bold"
+          ></textarea>
+          <div class="btg-char" aria-live="polite"><span id="btgCharN">0</span>/500</div>
+        </div>
+        <div class="btg-filters" role="group" aria-label="Style filters">
+          <span class="btg-flabel">Filter:</span>
+          <button class="btg-fbtn active" onclick="btgFilter('all',this)">All</button>
+          <button class="btg-fbtn" onclick="btgFilter('bold',this)">Bold</button>
+          <button class="btg-fbtn" onclick="btgFilter('italic',this)">Italic</button>
+          <button class="btg-fbtn" onclick="btgFilter('serif',this)">Serif</button>
+          <button class="btg-fbtn" onclick="btgFilter('sans',this)">Sans</button>
+          <button class="btg-fbtn" onclick="btgFilter('fancy',this)">Fancy</button>
+          <button class="btg-fbtn" onclick="btgFilter('special',this)">Special</button>
+        </div>
+        <div class="btg-results">
+          <div class="btg-grid" id="btgGrid" aria-live="polite" aria-label="Bold text results"></div>
+        </div>
+      </div><!-- /tool-card -->
+    </div><!-- /hero-left -->
+
+    <!-- RIGHT: SVG illustration -->
+    <div class="btg-hero-right" aria-hidden="true">
+      <svg viewBox="0 0 480 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Bold text illustration">
+        <!-- bg card -->
+        <rect x="20" y="20" width="440" height="380" rx="24" fill="#f7f6f3" stroke="#e8e5e0" stroke-width="1.5"/>
+        <!-- inner card top bar -->
+        <rect x="40" y="44" width="400" height="44" rx="12" fill="#fff" stroke="#e8e5e0" stroke-width="1"/>
+        <circle cx="60" cy="66" r="6" fill="#e85a2a" opacity=".7"/>
+        <circle cx="80" cy="66" r="6" fill="#c9a84c" opacity=".7"/>
+        <circle cx="100" cy="66" r="6" fill="#78706a" opacity=".4"/>
+        <text x="130" y="71" font-size="13" fill="#9e9690" font-family="monospace">Type your text…</text>
+        <!-- output rows -->
+        <!-- row 1 -->
+        <rect x="40" y="104" width="400" height="56" rx="12" fill="#fff" stroke="#e8e5e0" stroke-width="1"/>
+        <text x="56" y="122" font-size="9" fill="#9e9690" letter-spacing="1" text-transform="uppercase">SERIF BOLD</text>
+        <text x="56" y="147" font-size="22" fill="#0f0f0f" font-weight="900">𝐁𝐨𝐥𝐝 𝐓𝐞𝐱𝐭</text>
+        <rect x="358" y="118" width="68" height="26" rx="13" fill="#0f0f0f"/>
+        <text x="375" y="136" font-size="11" fill="#fff" font-weight="700">📋 Copy</text>
+        <!-- row 2 -->
+        <rect x="40" y="172" width="400" height="56" rx="12" fill="#fff" stroke="#e8e5e0" stroke-width="1"/>
+        <text x="56" y="190" font-size="9" fill="#9e9690" letter-spacing="1">SANS-SERIF BOLD</text>
+        <text x="56" y="215" font-size="22" fill="#0f0f0f">𝗕𝗼𝗹𝗱 𝗧𝗲𝘅𝘁</text>
+        <rect x="358" y="186" width="68" height="26" rx="13" fill="#22c55e"/>
+        <text x="370" y="204" font-size="11" fill="#fff" font-weight="700">✓ Copied!</text>
+        <!-- row 3 -->
+        <rect x="40" y="240" width="400" height="56" rx="12" fill="#fff" stroke="#e8e5e0" stroke-width="1"/>
+        <text x="56" y="258" font-size="9" fill="#9e9690" letter-spacing="1">BOLD ITALIC</text>
+        <text x="56" y="283" font-size="22" fill="#0f0f0f">𝑩𝒐𝒍𝒅 𝑻𝒆𝒙𝒕</text>
+        <rect x="358" y="254" width="68" height="26" rx="13" fill="#0f0f0f"/>
+        <text x="375" y="272" font-size="11" fill="#fff" font-weight="700">📋 Copy</text>
+        <!-- row 4 -->
+        <rect x="40" y="308" width="400" height="56" rx="12" fill="#fff" stroke="#e8e5e0" stroke-width="1"/>
+        <text x="56" y="326" font-size="9" fill="#9e9690" letter-spacing="1">SCRIPT BOLD</text>
+        <text x="56" y="351" font-size="22" fill="#0f0f0f">𝓑𝓸𝓵𝓭 𝓣𝓮𝔁𝓽</text>
+        <rect x="358" y="322" width="68" height="26" rx="13" fill="#0f0f0f"/>
+        <text x="375" y="340" font-size="11" fill="#fff" font-weight="700">📋 Copy</text>
+        <!-- accent badge -->
+        <rect x="40" y="376" width="130" height="8" rx="4" fill="#e85a2a" opacity=".12"/>
+        <rect x="180" y="376" width="80" height="8" rx="4" fill="#c9a84c" opacity=".12"/>
+      </svg>
+    </div><!-- /hero-right -->
+
+  </div><!-- /hero-inner -->
+</section><!-- /hero -->
+
+<!-- TICKER -->
+<div class="btg-ticker" aria-hidden="true">
+  <div class="btg-ticker-track" id="btgTicker"></div>
+</div>
+
+<!-- ===================================================
+     CONTENT SECTIONS — side-by-side with SVG images
+     =================================================== -->
+<div class="btg-sections">
+
+  <!-- 1. WHAT IS BOLD TEXT -->
+  <section class="btg-section btg-reveal" id="btg-what" aria-labelledby="btg-what-h2">
+    <div class="btg-sec-text">
+      <span class="btg-sec-tag">About Bold Text</span>
+      <h2 class="btg-sec-h2" id="btg-what-h2">What is bold text? And why do I need a generator?</h2>
+      <p class="btg-sec-p">Bold text is a typographic style where characters appear thicker and darker than regular text, making them stand out on a page or screen. Traditionally, bold is applied with HTML <code>&lt;b&gt;</code> tags or a toolbar button &mdash; but most social media platforms and messaging apps strip those styles away the moment you paste.</p>
+      <p class="btg-sec-p">That&rsquo;s where a bold text generator comes in. By using <strong>Unicode mathematical bold characters</strong>, you produce text that <em>looks</em> bold everywhere &mdash; from Instagram bios to Twitter posts to email subject lines &mdash; without relying on any formatting support from the platform.</p>
+    </div>
+    <div class="btg-sec-img" aria-hidden="true">
+      <!-- SVG: regular vs bold comparison -->
+      <svg viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg">
+        <rect width="400" height="320" rx="20" fill="#f7f6f3"/>
+        <!-- label top -->
+        <text x="200" y="36" text-anchor="middle" font-size="11" fill="#9e9690" letter-spacing="1.5" font-family="sans-serif">REGULAR vs BOLD</text>
+        <!-- regular card -->
+        <rect x="24" y="52" width="160" height="120" rx="14" fill="#fff" stroke="#e8e5e0" stroke-width="1.5"/>
+        <text x="104" y="84" text-anchor="middle" font-size="9" fill="#9e9690" letter-spacing="1" font-family="sans-serif">REGULAR</text>
+        <text x="104" y="112" text-anchor="middle" font-size="20" fill="#78706a" font-family="sans-serif">Hello</text>
+        <text x="104" y="140" text-anchor="middle" font-size="20" fill="#78706a" font-family="sans-serif">World</text>
+        <rect x="44" y="155" width="120" height="6" rx="3" fill="#e8e5e0"/>
+        <!-- arrow -->
+        <text x="200" y="118" text-anchor="middle" font-size="28" fill="#e85a2a">→</text>
+        <!-- bold card -->
+        <rect x="216" y="52" width="160" height="120" rx="14" fill="#0f0f0f"/>
+        <text x="296" y="84" text-anchor="middle" font-size="9" fill="rgba(255,255,255,.4)" letter-spacing="1" font-family="sans-serif">BOLD UNICODE</text>
+        <text x="296" y="112" text-anchor="middle" font-size="20" fill="#fff" font-weight="900" font-family="sans-serif">𝗛𝗲𝗹𝗹𝗼</text>
+        <text x="296" y="140" text-anchor="middle" font-size="20" fill="#e85a2a" font-weight="900" font-family="sans-serif">𝗪𝗼𝗿𝗹𝗱</text>
+        <rect x="236" y="155" width="120" height="6" rx="3" fill="rgba(232,90,42,.4)"/>
+        <!-- bottom labels -->
+        <rect x="24" y="192" width="352" height="44" rx="10" fill="#fff" stroke="#e8e5e0" stroke-width="1"/>
+        <text x="200" y="208" text-anchor="middle" font-size="10" fill="#9e9690" font-family="sans-serif">Works in any plain-text field</text>
+        <text x="200" y="226" text-anchor="middle" font-size="12" fill="#0f0f0f" font-weight="600" font-family="sans-serif">Instagram · Twitter · WhatsApp · LinkedIn</text>
+        <!-- platforms row -->
+        <rect x="24" y="252" width="80" height="44" rx="10" fill="#fdf0eb" stroke="rgba(232,90,42,.2)" stroke-width="1"/>
+        <text x="64" y="281" text-anchor="middle" font-size="24" font-family="sans-serif">📸</text>
+        <rect x="116" y="252" width="80" height="44" rx="10" fill="#f7f6f3" stroke="#e8e5e0" stroke-width="1"/>
+        <text x="156" y="281" text-anchor="middle" font-size="24" font-family="sans-serif">🐦</text>
+        <rect x="208" y="252" width="80" height="44" rx="10" fill="#f7f6f3" stroke="#e8e5e0" stroke-width="1"/>
+        <text x="248" y="281" text-anchor="middle" font-size="24" font-family="sans-serif">💬</text>
+        <rect x="300" y="252" width="80" height="44" rx="10" fill="#f7f6f3" stroke="#e8e5e0" stroke-width="1"/>
+        <text x="340" y="281" text-anchor="middle" font-size="24" font-family="sans-serif">💼</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 2. HOW TO USE — reversed layout -->
+  <section class="btg-section reverse btg-reveal" id="btg-how" aria-labelledby="btg-how-h2">
+    <div class="btg-sec-text">
+      <span class="btg-sec-tag">How It Works</span>
+      <h2 class="btg-sec-h2" id="btg-how-h2">How to Bold Text Using the Bold Text Generator?</h2>
+      <p class="btg-sec-p">Fast, free, and zero technical knowledge required. Three steps:</p>
+      <div class="btg-steps">
+        <div class="btg-step">
+          <div class="btg-step-num">1</div>
+          <div class="btg-step-body">
+            <h3>Type Your Text</h3>
+            <p>Enter any word, sentence, bio, or caption in the input box above. The generator converts in real time as you type.</p>
+          </div>
+        </div>
+        <div class="btg-step">
+          <div class="btg-step-num">2</div>
+          <div class="btg-step-body">
+            <h3>Explore Our Bold Font Library</h3>
+            <p>Browse 13+ unique Unicode bold styles generated instantly. Filter by Bold, Italic, Serif, Sans-Serif, Fancy, or Special to find the perfect look.</p>
+          </div>
+        </div>
+        <div class="btg-step">
+          <div class="btg-step-num">3</div>
+          <div class="btg-step-body">
+            <h3>Copy and Paste</h3>
+            <p>Hit Copy on any style card. Paste directly into Instagram, Facebook, Twitter, WhatsApp, TikTok, Discord &mdash; anywhere. No app needed.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="btg-sec-img" aria-hidden="true">
+      <!-- SVG: 3-step flow diagram -->
+      <svg viewBox="0 0 380 360" xmlns="http://www.w3.org/2000/svg">
+        <rect width="380" height="360" rx="20" fill="#f7f6f3"/>
+        <!-- Step 1 -->
+        <rect x="24" y="28" width="332" height="84" rx="14" fill="#fff" stroke="#e8e5e0" stroke-width="1.5"/>
+        <circle cx="56" cy="70" r="18" fill="#0f0f0f"/>
+        <text x="56" y="76" text-anchor="middle" font-size="14" fill="#fff" font-weight="800" font-family="sans-serif">1</text>
+        <text x="84" y="60" font-size="13" fill="#0f0f0f" font-weight="700" font-family="sans-serif">Type Your Text</text>
+        <rect x="84" y="72" width="180" height="10" rx="4" fill="#e85a2a" opacity=".2"/>
+        <rect x="84" y="88" width="120" height="8" rx="3" fill="#e8e5e0"/>
+        <!-- arrow down -->
+        <text x="190" y="132" text-anchor="middle" font-size="22" fill="#e85a2a">↓</text>
+        <!-- Step 2 -->
+        <rect x="24" y="142" width="332" height="84" rx="14" fill="#fff" stroke="#e8e5e0" stroke-width="1.5"/>
+        <circle cx="56" cy="184" r="18" fill="#e85a2a"/>
+        <text x="56" y="190" text-anchor="middle" font-size="14" fill="#fff" font-weight="800" font-family="sans-serif">2</text>
+        <text x="84" y="174" font-size="13" fill="#0f0f0f" font-weight="700" font-family="sans-serif">Pick a Bold Style</text>
+        <text x="84" y="195" font-size="15" fill="#0f0f0f" font-family="sans-serif">𝗕𝗼𝗹𝗱</text>
+        <text x="136" y="195" font-size="15" fill="#0f0f0f" font-family="sans-serif">𝑩𝒐𝒍𝒅</text>
+        <text x="188" y="195" font-size="15" fill="#0f0f0f" font-family="sans-serif">𝓑𝓸𝓵𝓭</text>
+        <text x="240" y="195" font-size="15" fill="#0f0f0f" font-family="sans-serif">𝕭𝖔𝖑𝖉</text>
+        <text x="84" y="215" font-size="12" fill="#9e9690" font-family="sans-serif">13+ styles to choose from</text>
+        <!-- arrow down -->
+        <text x="190" y="248" text-anchor="middle" font-size="22" fill="#e85a2a">↓</text>
+        <!-- Step 3 -->
+        <rect x="24" y="258" width="332" height="84" rx="14" fill="#0f0f0f"/>
+        <circle cx="56" cy="300" r="18" fill="#22c55e"/>
+        <text x="56" y="306" text-anchor="middle" font-size="14" fill="#fff" font-weight="800" font-family="sans-serif">3</text>
+        <text x="84" y="290" font-size="13" fill="#fff" font-weight="700" font-family="sans-serif">Copy &amp; Paste Anywhere</text>
+        <rect x="84" y="302" width="160" height="10" rx="4" fill="rgba(255,255,255,.1)"/>
+        <rect x="260" y="295" width="80" height="24" rx="12" fill="#22c55e"/>
+        <text x="300" y="311" text-anchor="middle" font-size="11" fill="#fff" font-weight="700" font-family="sans-serif">✓ Copied!</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 3. COPY & PASTE — normal layout -->
+  <section class="btg-section btg-reveal" id="btg-copypaste" aria-labelledby="btg-copypaste-h2">
+    <div class="btg-sec-text">
+      <span class="btg-sec-tag">Copy &amp; Paste</span>
+      <h2 class="btg-sec-h2" id="btg-copypaste-h2">Copy and Paste Bold Text Generator</h2>
+      <p class="btg-sec-p">The copy-and-paste approach is what makes this tool so powerful. Because the bold characters are actual <strong>Unicode code points</strong> — not HTML formatting — they survive pasting into any text field on any platform.</p>
+      <p class="btg-sec-p">Whether you&rsquo;re updating your social media bio, writing a product description, or composing a message, simply generate bold text here and paste it anywhere. No browser extension, no formatting toolbar, no special software needed.</p>
+    </div>
+    <div class="btg-sec-img" aria-hidden="true">
+      <!-- SVG: copy-paste action diagram -->
+      <svg viewBox="0 0 380 280" xmlns="http://www.w3.org/2000/svg">
+        <rect width="380" height="280" rx="20" fill="#f7f6f3"/>
+        <!-- Source box -->
+        <rect x="24" y="32" width="160" height="80" rx="12" fill="#fff" stroke="#e8e5e0" stroke-width="1.5"/>
+        <text x="44" y="56" font-size="9" fill="#9e9690" letter-spacing="1" font-family="sans-serif">GENERATOR</text>
+        <text x="44" y="80" font-size="20" fill="#0f0f0f" font-family="sans-serif">𝗛𝗲𝗹𝗹𝗼</text>
+        <rect x="116" y="94" width="52" height="20" rx="10" fill="#0f0f0f"/>
+        <text x="142" y="108" text-anchor="middle" font-size="10" fill="#fff" font-weight="700" font-family="sans-serif">Copy</text>
+        <!-- Arrow -->
+        <text x="198" y="78" font-size="32" fill="#e85a2a" font-family="sans-serif">→</text>
+        <!-- Destination boxes -->
+        <rect x="230" y="24" width="126" height="36" rx="10" fill="#fdf0eb" stroke="rgba(232,90,42,.2)" stroke-width="1"/>
+        <text x="246" y="47" font-size="12" fill="#e85a2a" font-weight="700" font-family="sans-serif">📸 Instagram</text>
+        <rect x="230" y="68" width="126" height="36" rx="10" fill="#f7f6f3" stroke="#e8e5e0" stroke-width="1"/>
+        <text x="246" y="91" font-size="12" fill="#0f0f0f" font-weight="600" font-family="sans-serif">🐦 Twitter / X</text>
+        <rect x="230" y="112" width="126" height="36" rx="10" fill="#f7f6f3" stroke="#e8e5e0" stroke-width="1"/>
+        <text x="246" y="135" font-size="12" fill="#0f0f0f" font-weight="600" font-family="sans-serif">💼 LinkedIn</text>
+        <!-- Divider -->
+        <line x1="24" y1="148" x2="356" y2="148" stroke="#e8e5e0" stroke-width="1"/>
+        <!-- Works everywhere note -->
+        <text x="190" y="176" text-anchor="middle" font-size="11" fill="#9e9690" font-family="sans-serif">Unicode characters work in ANY text field</text>
+        <!-- check marks -->
+        <text x="50" y="216" text-anchor="middle" font-size="22" font-family="sans-serif">✅</text>
+        <text x="120" y="216" text-anchor="middle" font-size="22" font-family="sans-serif">✅</text>
+        <text x="190" y="216" text-anchor="middle" font-size="22" font-family="sans-serif">✅</text>
+        <text x="260" y="216" text-anchor="middle" font-size="22" font-family="sans-serif">✅</text>
+        <text x="330" y="216" text-anchor="middle" font-size="22" font-family="sans-serif">✅</text>
+        <text x="50" y="240" text-anchor="middle" font-size="9" fill="#9e9690" font-family="sans-serif">iOS</text>
+        <text x="120" y="240" text-anchor="middle" font-size="9" fill="#9e9690" font-family="sans-serif">Android</text>
+        <text x="190" y="240" text-anchor="middle" font-size="9" fill="#9e9690" font-family="sans-serif">Mac</text>
+        <text x="260" y="240" text-anchor="middle" font-size="9" fill="#9e9690" font-family="sans-serif">Windows</text>
+        <text x="330" y="240" text-anchor="middle" font-size="9" fill="#9e9690" font-family="sans-serif">Linux</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 4. EYE-CATCHING — reversed -->
+  <section class="btg-section reverse btg-reveal" aria-labelledby="btg-eye-h2">
+    <div class="btg-sec-text">
+      <span class="btg-sec-tag">Stand Out</span>
+      <h2 class="btg-sec-h2" id="btg-eye-h2">Make Eye-Catching Statements with the Bold Text Generator</h2>
+      <p class="btg-sec-p">In a world of endless scrolling, bold text stops thumbs in their tracks. Use our generator to highlight key phrases in your posts, emphasize your call-to-action, or make your username and bio impossible to overlook.</p>
+      <p class="btg-sec-p">Whether you&rsquo;re a creator, marketer, or entrepreneur, bold text is one of the simplest and most effective tools in your content toolkit &mdash; and it costs you nothing.</p>
+    </div>
+    <div class="btg-sec-img" aria-hidden="true">
+      <!-- SVG: before/after engagement -->
+      <svg viewBox="0 0 380 300" xmlns="http://www.w3.org/2000/svg">
+        <rect width="380" height="300" rx="20" fill="#f7f6f3"/>
+        <!-- Before post -->
+        <rect x="24" y="28" width="155" height="110" rx="12" fill="#fff" stroke="#e8e5e0" stroke-width="1.5"/>
+        <text x="44" y="50" font-size="9" fill="#9e9690" letter-spacing="1" font-family="sans-serif">BEFORE</text>
+        <text x="44" y="72" font-size="13" fill="#3a3530" font-family="sans-serif">Check out my</text>
+        <text x="44" y="90" font-size="13" fill="#3a3530" font-family="sans-serif">new product!</text>
+        <text x="44" y="110" font-size="11" fill="#9e9690" font-family="sans-serif">👍 12  💬 3</text>
+        <text x="44" y="128" font-size="9" fill="#9e9690" font-family="sans-serif">Low engagement</text>
+        <!-- After post -->
+        <rect x="200" y="28" width="156" height="110" rx="12" fill="#0f0f0f"/>
+        <text x="220" y="50" font-size="9" fill="rgba(255,255,255,.4)" letter-spacing="1" font-family="sans-serif">AFTER</text>
+        <text x="220" y="72" font-size="13" fill="#fff" font-family="sans-serif">Check out my</text>
+        <text x="220" y="90" font-size="13" fill="#e85a2a" font-weight="900" font-family="sans-serif">𝗻𝗲𝘄 𝗽𝗿𝗼𝗱𝘂𝗰𝘁!</text>
+        <text x="220" y="110" font-size="11" fill="rgba(255,255,255,.7)" font-family="sans-serif">👍 284  💬 47</text>
+        <text x="220" y="128" font-size="9" fill="#22c55e" font-family="sans-serif">High engagement</text>
+        <!-- bar chart -->
+        <rect x="24" y="160" width="332" height="120" rx="12" fill="#fff" stroke="#e8e5e0" stroke-width="1"/>
+        <text x="44" y="182" font-size="10" fill="#9e9690" font-family="sans-serif">Engagement comparison</text>
+        <!-- bars -->
+        <rect x="60" y="235" width="32" height="40" rx="4" fill="#e8e5e0"/>
+        <rect x="124" y="195" width="32" height="80" rx="4" fill="#e85a2a"/>
+        <rect x="188" y="220" width="32" height="55" rx="4" fill="#e8e5e0"/>
+        <rect x="252" y="185" width="32" height="90" rx="4" fill="#c9a84c"/>
+        <text x="76" y="250" text-anchor="middle" font-size="8" fill="#9e9690" font-family="sans-serif">Plain</text>
+        <text x="140" y="250" text-anchor="middle" font-size="8" fill="#e85a2a" font-family="sans-serif">Bold</text>
+        <text x="204" y="250" text-anchor="middle" font-size="8" fill="#9e9690" font-family="sans-serif">Emoji</text>
+        <text x="268" y="250" text-anchor="middle" font-size="8" fill="#c9a84c" font-family="sans-serif">Bold+</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 5. UNICODE -->
+  <section class="btg-section btg-reveal" id="btg-unicode" aria-labelledby="btg-unicode-h2">
+    <div class="btg-sec-text">
+      <span class="btg-sec-tag">Technology</span>
+      <h2 class="btg-sec-h2" id="btg-unicode-h2">Unicode &amp; Unicode Bold Characters</h2>
+      <p class="btg-sec-p">Unicode is the universal encoding standard assigning a unique number to every character across 150+ writing systems. Because every modern OS, browser, and platform supports Unicode, a character typed anywhere displays identically everywhere.</p>
+      <p class="btg-sec-p">Within Unicode, the <strong>Mathematical Alphanumeric Symbols block</strong> (U+1D400–U+1D7FF) contains dedicated bold versions of every Latin letter and digit. <strong>𝐀</strong> is a completely different code point from <strong>A</strong> &mdash; so when you paste it, the boldness is intrinsic to the character itself, not styling layered on top. That&rsquo;s why it works in plain-text fields where HTML bold cannot.</p>
+      <p class="btg-sec-p">Unicode also includes <strong>bold italic</strong> variants &mdash; serif (𝑨𝑩𝑪) and sans-serif (𝙃𝙚𝙡𝙡𝙤) &mdash; combining weight and angle for maximum visual impact.</p>
+    </div>
+    <div class="btg-sec-img" aria-hidden="true">
+      <!-- SVG: Unicode codepoint visual -->
+      <svg viewBox="0 0 380 320" xmlns="http://www.w3.org/2000/svg">
+        <rect width="380" height="320" rx="20" fill="#0f0f0f"/>
+        <text x="190" y="40" text-anchor="middle" font-size="11" fill="rgba(255,255,255,.4)" letter-spacing="2" font-family="monospace">UNICODE BLOCK U+1D400</text>
+        <!-- code points grid -->
+        <rect x="24" y="56" width="72" height="56" rx="10" fill="rgba(255,255,255,.05)" stroke="rgba(232,90,42,.4)" stroke-width="1.5"/>
+        <text x="60" y="82" text-anchor="middle" font-size="22" fill="#fff" font-family="sans-serif">𝐀</text>
+        <text x="60" y="102" text-anchor="middle" font-size="9" fill="rgba(255,255,255,.3)" font-family="monospace">U+1D400</text>
+        <rect x="108" y="56" width="72" height="56" rx="10" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
+        <text x="144" y="82" text-anchor="middle" font-size="22" fill="#fff" font-family="sans-serif">𝐁</text>
+        <text x="144" y="102" text-anchor="middle" font-size="9" fill="rgba(255,255,255,.3)" font-family="monospace">U+1D401</text>
+        <rect x="192" y="56" width="72" height="56" rx="10" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
+        <text x="228" y="82" text-anchor="middle" font-size="22" fill="#fff" font-family="sans-serif">𝐂</text>
+        <text x="228" y="102" text-anchor="middle" font-size="9" fill="rgba(255,255,255,.3)" font-family="monospace">U+1D402</text>
+        <rect x="276" y="56" width="80" height="56" rx="10" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
+        <text x="316" y="82" text-anchor="middle" font-size="22" fill="rgba(255,255,255,.3)" font-family="sans-serif">…</text>
+        <text x="316" y="102" text-anchor="middle" font-size="9" fill="rgba(255,255,255,.2)" font-family="monospace">+140k</text>
+        <!-- styles showcase -->
+        <rect x="24" y="132" width="332" height="44" rx="10" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.07)" stroke-width="1"/>
+        <text x="40" y="153" font-size="9" fill="rgba(255,255,255,.3)" font-family="sans-serif">SERIF BOLD</text>
+        <text x="40" y="168" font-size="16" fill="#fff" font-family="sans-serif">𝐁𝐨𝐥𝐝 𝐓𝐞𝐱𝐭</text>
+        <rect x="24" y="186" width="332" height="44" rx="10" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.07)" stroke-width="1"/>
+        <text x="40" y="207" font-size="9" fill="rgba(255,255,255,.3)" font-family="sans-serif">SANS BOLD</text>
+        <text x="40" y="222" font-size="16" fill="#fff" font-family="sans-serif">𝗕𝗼𝗹𝗱 𝗧𝗲𝘅𝘁</text>
+        <rect x="24" y="240" width="332" height="44" rx="10" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.07)" stroke-width="1"/>
+        <text x="40" y="261" font-size="9" fill="rgba(255,255,255,.3)" font-family="sans-serif">BOLD ITALIC</text>
+        <text x="40" y="276" font-size="16" fill="#e85a2a" font-family="sans-serif">𝑩𝒐𝒍𝒅 𝑻𝒆𝒙𝒕</text>
+        <!-- compatible badge -->
+        <rect x="24" y="296" width="332" height="16" rx="4" fill="rgba(34,197,94,.15)"/>
+        <text x="190" y="308" text-anchor="middle" font-size="9" fill="#22c55e" letter-spacing="1" font-family="sans-serif">✓ WORKS EVERYWHERE — NO HTML REQUIRED</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 6. WHERE CAN YOU POST — full width with platform grid -->
+  <section class="btg-section full btg-reveal" id="btg-where" aria-labelledby="btg-where-h2">
+    <div class="btg-sec-text">
+      <span class="btg-sec-tag">Platforms</span>
+      <h2 class="btg-sec-h2" id="btg-where-h2">Where Can You Post Bold Text?</h2>
+      <p class="btg-sec-p">Unicode bold characters are supported on virtually every platform that displays text. Here&rsquo;s where creators and marketers use them most:</p>
+    </div>
+    <div class="btg-platforms">
+      <div class="btg-plat dark">
+        <div class="btg-plat-icon">📸</div>
+        <h3>Instagram &amp; TikTok</h3>
+        <p>Bold bios, captions, and comments stop the scroll. Unicode bold in your Instagram bio dramatically increases profile engagement and click-throughs.</p>
+      </div>
+      <div class="btg-plat peach">
+        <div class="btg-plat-icon">💼</div>
+        <h3>LinkedIn &amp; Twitter / X</h3>
+        <p>Stand out in professional feeds and search results. Bold key points in LinkedIn posts and Twitter threads drive higher impressions and click-through rates.</p>
+      </div>
+      <div class="btg-plat warm">
+        <div class="btg-plat-icon">💬</div>
+        <h3>WhatsApp &amp; Telegram</h3>
+        <p>Add visual punch to group messages and announcements. Unicode bold works in every messaging app without needing markdown or special syntax.</p>
+      </div>
+      <div class="btg-plat neutral">
+        <div class="btg-plat-icon">🎨</div>
+        <h3>Design &amp; Content</h3>
+        <p>Email newsletters, YouTube descriptions, Notion pages, Discord servers, and Canva designs all support Unicode bold as plain-text characters.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. FACEBOOK — reversed -->
+  <section class="btg-section reverse btg-reveal" id="btg-facebook" aria-labelledby="btg-fb-h2">
+    <div class="btg-sec-text">
+      <span class="btg-sec-tag">Facebook</span>
+      <h2 class="btg-sec-h2" id="btg-fb-h2">How to generate Fancy Bold Text for Facebook Post? How to Post Bold Text on Facebook?</h2>
+      <p class="btg-sec-p">Facebook does not natively support bold in status updates or comments &mdash; but Unicode bold characters work perfectly. Type into the generator above, choose a style, hit Copy, and paste directly into your Facebook post, comment, bio, Group post, event description, page update, or Marketplace listing.</p>
+      <p class="btg-sec-p">The bold characters appear exactly as styled since Facebook renders Unicode like any other character. No third-party extension needed.</p>
+    </div>
+    <div class="btg-sec-img" aria-hidden="true">
+      <!-- SVG: Facebook-style post mockup -->
+      <svg viewBox="0 0 380 280" xmlns="http://www.w3.org/2000/svg">
+        <rect width="380" height="280" rx="20" fill="#f0f2f5"/>
+        <!-- FB post card -->
+        <rect x="24" y="20" width="332" height="240" rx="12" fill="#fff" stroke="#e4e6ea" stroke-width="1.5"/>
+        <!-- avatar + name -->
+        <circle cx="52" cy="52" r="20" fill="#1877f2" opacity=".8"/>
+        <text x="52" y="58" text-anchor="middle" font-size="14" fill="#fff" font-weight="700" font-family="sans-serif">F</text>
+        <text x="82" y="47" font-size="13" fill="#050505" font-weight="700" font-family="sans-serif">Your Name</text>
+        <text x="82" y="63" font-size="11" fill="#65676b" font-family="sans-serif">Just now · 🌐</text>
+        <!-- post text -->
+        <text x="44" y="96" font-size="14" fill="#050505" font-family="sans-serif">Excited to share my</text>
+        <text x="44" y="116" font-size="16" fill="#1877f2" font-weight="900" font-family="sans-serif">𝗻𝗲𝘄 𝗽𝗿𝗼𝗱𝘂𝗰𝘁 𝗹𝗮𝘂𝗻𝗰𝗵! 🚀</text>
+        <text x="44" y="138" font-size="14" fill="#050505" font-family="sans-serif">This changes everything.</text>
+        <text x="44" y="158" font-size="14" fill="#e85a2a" font-weight="700" font-family="sans-serif">𝗟𝗶𝗻𝗸 𝗶𝗻 𝗯𝗶𝗼</text>
+        <!-- divider -->
+        <line x1="44" y1="176" x2="336" y2="176" stroke="#e4e6ea" stroke-width="1"/>
+        <!-- reactions row -->
+        <text x="52" y="202" font-size="16" font-family="sans-serif">👍</text>
+        <text x="72" y="202" font-size="16" font-family="sans-serif">❤️</text>
+        <text x="92" y="202" font-size="16" font-family="sans-serif">🎉</text>
+        <text x="116" y="200" font-size="12" fill="#65676b" font-family="sans-serif">1.2K · 84 comments · 34 shares</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 8. INSTAGRAM -->
+  <section class="btg-section btg-reveal" id="btg-instagram" aria-labelledby="btg-ig-h2">
+    <div class="btg-sec-text">
+      <span class="btg-sec-tag">Instagram</span>
+      <h2 class="btg-sec-h2" id="btg-ig-h2">Boost Your Instagram Profile with Bold Fonts</h2>
+      <p class="btg-sec-p">Your Instagram bio is prime real estate. Bold fonts make it memorable. Use bold text to highlight your name, profession, or tagline. Mix bold styles with regular text to create visual hierarchy in your bio and captions. Bold text in comments makes your engagement stand out too.</p>
+      <p class="btg-sec-p">With this generator you can preview multiple styles side by side and find the perfect aesthetic in seconds &mdash; no trial and error inside the Instagram app.</p>
+    </div>
+    <div class="btg-sec-img" aria-hidden="true">
+      <!-- SVG: Instagram profile mockup -->
+      <svg viewBox="0 0 380 320" xmlns="http://www.w3.org/2000/svg">
+        <rect width="380" height="320" rx="20" fill="#f7f6f3"/>
+        <!-- phone frame -->
+        <rect x="90" y="20" width="200" height="280" rx="24" fill="#fff" stroke="#e8e5e0" stroke-width="2"/>
+        <!-- status bar -->
+        <rect x="90" y="20" width="200" height="28" rx="24" fill="#fff"/>
+        <text x="190" y="38" text-anchor="middle" font-size="8" fill="#9e9690" font-family="sans-serif">9:41</text>
+        <!-- profile area -->
+        <circle cx="190" cy="90" r="32" fill="#e85a2a" opacity=".15" stroke="#e85a2a" stroke-width="2"/>
+        <text x="190" y="98" text-anchor="middle" font-size="24" font-family="sans-serif">👤</text>
+        <!-- bio lines -->
+        <text x="190" y="142" text-anchor="middle" font-size="13" fill="#0f0f0f" font-weight="900" font-family="sans-serif">𝗬𝗼𝘂𝗿 𝗡𝗮𝗺𝗲</text>
+        <text x="190" y="158" text-anchor="middle" font-size="10" fill="#9e9690" font-family="sans-serif">𝗗𝗶𝗴𝗶𝘁𝗮𝗹 𝗖𝗿𝗲𝗮𝘁𝗼𝗿</text>
+        <text x="190" y="174" text-anchor="middle" font-size="10" fill="#0f0f0f" font-family="sans-serif">✨ Content · Design · Growth</text>
+        <text x="190" y="190" text-anchor="middle" font-size="10" fill="#e85a2a" font-family="sans-serif">🔗 mylink.bio/me</text>
+        <!-- stats -->
+        <text x="140" y="214" text-anchor="middle" font-size="11" fill="#0f0f0f" font-weight="700" font-family="sans-serif">428</text>
+        <text x="140" y="226" text-anchor="middle" font-size="9" fill="#9e9690" font-family="sans-serif">posts</text>
+        <text x="190" y="214" text-anchor="middle" font-size="11" fill="#0f0f0f" font-weight="700" font-family="sans-serif">12.4K</text>
+        <text x="190" y="226" text-anchor="middle" font-size="9" fill="#9e9690" font-family="sans-serif">followers</text>
+        <text x="240" y="214" text-anchor="middle" font-size="11" fill="#0f0f0f" font-weight="700" font-family="sans-serif">384</text>
+        <text x="240" y="226" text-anchor="middle" font-size="9" fill="#9e9690" font-family="sans-serif">following</text>
+        <!-- follow button -->
+        <rect x="120" y="238" width="140" height="28" rx="8" fill="#0f0f0f"/>
+        <text x="190" y="257" text-anchor="middle" font-size="12" fill="#fff" font-weight="700" font-family="sans-serif">Follow</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 9. DESIGN — reversed -->
+  <section class="btg-section reverse btg-reveal" id="btg-design" aria-labelledby="btg-design-h2">
+    <div class="btg-sec-text">
+      <span class="btg-sec-tag">Design</span>
+      <h2 class="btg-sec-h2" id="btg-design-h2">Integrate Bold Text into Your Design</h2>
+      <p class="btg-sec-p">Bold Unicode characters aren&rsquo;t just for social media. Integrate them into email subject lines to boost open rates, use them in Notion and Confluence pages for emphasis without HTML, add them to YouTube descriptions for scannability, and embed them in Canva designs as real text.</p>
+      <p class="btg-sec-p">Because they are plain text, they are fully accessible to screen readers &mdash; something image-based bold text can never be. Designers and content creators increasingly rely on Unicode bold as a versatile, zero-dependency styling solution.</p>
+    </div>
+    <div class="btg-sec-img" aria-hidden="true">
+      <!-- SVG: multi-platform design usage -->
+      <svg viewBox="0 0 380 300" xmlns="http://www.w3.org/2000/svg">
+        <rect width="380" height="300" rx="20" fill="#f7f6f3"/>
+        <!-- Email mockup -->
+        <rect x="24" y="24" width="332" height="72" rx="12" fill="#fff" stroke="#e8e5e0" stroke-width="1.5"/>
+        <text x="44" y="44" font-size="9" fill="#9e9690" letter-spacing="1" font-family="sans-serif">EMAIL SUBJECT</text>
+        <text x="44" y="68" font-size="15" fill="#0f0f0f" font-family="sans-serif">📧 <tspan font-weight="900">𝗗𝗼𝗻'𝘁 𝗺𝗶𝘀𝘀</tspan> our biggest sale ever</text>
+        <rect x="300" y="58" width="44" height="18" rx="6" fill="#22c55e" opacity=".2"/>
+        <text x="322" y="71" text-anchor="middle" font-size="8" fill="#15803d" font-weight="700" font-family="sans-serif">+42% opens</text>
+        <!-- YouTube desc -->
+        <rect x="24" y="108" width="332" height="60" rx="12" fill="#fff" stroke="#e8e5e0" stroke-width="1.5"/>
+        <text x="44" y="128" font-size="9" fill="#9e9690" letter-spacing="1" font-family="sans-serif">YOUTUBE DESCRIPTION</text>
+        <text x="44" y="150" font-size="13" fill="#0f0f0f" font-family="sans-serif">🎯 <tspan fill="#e85a2a" font-weight="900">𝗪𝗮𝘁𝗰𝗵 𝘁𝗶𝗹𝗹 𝘁𝗵𝗲 𝗲𝗻𝗱</tspan> for the secret trick</text>
+        <!-- Notion page -->
+        <rect x="24" y="180" width="332" height="60" rx="12" fill="#fff" stroke="#e8e5e0" stroke-width="1.5"/>
+        <text x="44" y="200" font-size="9" fill="#9e9690" letter-spacing="1" font-family="sans-serif">NOTION / CONFLUENCE</text>
+        <text x="44" y="222" font-size="13" fill="#0f0f0f" font-family="sans-serif">📋 <tspan font-weight="900">𝗞𝗲𝘆 𝗗𝗲𝗰𝗶𝘀𝗶𝗼𝗻:</tspan> Deploy on Friday</text>
+        <!-- Accessibility badge -->
+        <rect x="24" y="256" width="332" height="32" rx="8" fill="#fdf0eb" stroke="rgba(232,90,42,.15)" stroke-width="1"/>
+        <text x="190" y="277" text-anchor="middle" font-size="11" fill="#e85a2a" font-weight="600" font-family="sans-serif">♿ Fully accessible — screen readers support Unicode bold</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 10. NOT ONLY BOLD — styles grid, full width -->
+  <section class="btg-section full btg-reveal" id="btg-styles" aria-labelledby="btg-styles-h2">
+    <div class="btg-sec-text">
+      <span class="btg-sec-tag">All Styles</span>
+      <h2 class="btg-sec-h2" id="btg-styles-h2">Not Only the Bold Text Fonts</h2>
+      <p class="btg-sec-p">This generator goes far beyond standard bold. Explore the full Unicode style library &mdash; each character is a distinct code point, not just styled text:</p>
+    </div>
+    <div class="btg-styles-grid" id="btgStylesGrid" aria-label="All bold text styles"></div>
+  </section>
+
+  <!-- 11. WHY CHOOSE — reversed -->
+  <section class="btg-section reverse btg-reveal" id="btg-why" aria-labelledby="btg-why-h2">
+    <div class="btg-sec-text">
+      <span class="btg-sec-tag">Why Us</span>
+      <h2 class="btg-sec-h2" id="btg-why-h2">Why choose my bold text generator?</h2>
+      <p class="btg-sec-p">There are dozens of text generators out there &mdash; here&rsquo;s what sets this one apart:</p>
+      <div class="btg-steps">
+        <div class="btg-step">
+          <div class="btg-step-num">✓</div>
+          <div class="btg-step-body">
+            <h3>Easy to Use</h3>
+            <p>No learning curve. No account required. Type, pick a style, copy. The entire workflow takes under ten seconds on desktop or mobile.</p>
+          </div>
+        </div>
+        <div class="btg-step">
+          <div class="btg-step-num">✓</div>
+          <div class="btg-step-body">
+            <h3>Generate for Free</h3>
+            <p>100% free, forever. No subscription, no limits, no watermarks, no &ldquo;pro&rdquo; tier. Every style is available to every user at no cost.</p>
+          </div>
+        </div>
+        <div class="btg-step">
+          <div class="btg-step-num">✓</div>
+          <div class="btg-step-body">
+            <h3>Cross-Platform Compatibility</h3>
+            <p>Works on Instagram, Twitter/X, Facebook, LinkedIn, WhatsApp, TikTok, YouTube, Discord, Slack, Gmail, Notion &mdash; on any device and OS.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="btg-sec-img" aria-hidden="true">
+      <!-- SVG: feature comparison table -->
+      <svg viewBox="0 0 380 300" xmlns="http://www.w3.org/2000/svg">
+        <rect width="380" height="300" rx="20" fill="#f7f6f3"/>
+        <text x="190" y="36" text-anchor="middle" font-size="11" fill="#9e9690" letter-spacing="1" font-family="sans-serif">FEATURE COMPARISON</text>
+        <!-- header row -->
+        <rect x="24" y="48" width="332" height="32" rx="8" fill="#0f0f0f"/>
+        <text x="140" y="69" text-anchor="middle" font-size="10" fill="rgba(255,255,255,.5)" font-family="sans-serif">Others</text>
+        <text x="280" y="69" text-anchor="middle" font-size="10" fill="#e85a2a" font-weight="700" font-family="sans-serif">BoldGen ⚡</text>
+        <!-- rows -->
+        <rect x="24" y="88" width="332" height="36" rx="0" fill="#fff"/>
+        <text x="70" y="111" font-size="12" fill="#0f0f0f" font-family="sans-serif">Free to use</text>
+        <text x="140" y="111" text-anchor="middle" font-size="16" font-family="sans-serif">⚠️</text>
+        <text x="280" y="111" text-anchor="middle" font-size="16" font-family="sans-serif">✅</text>
+        <rect x="24" y="124" width="332" height="36" rx="0" fill="#f7f6f3"/>
+        <text x="70" y="147" font-size="12" fill="#0f0f0f" font-family="sans-serif">No signup required</text>
+        <text x="140" y="147" text-anchor="middle" font-size="16" font-family="sans-serif">❌</text>
+        <text x="280" y="147" text-anchor="middle" font-size="16" font-family="sans-serif">✅</text>
+        <rect x="24" y="160" width="332" height="36" rx="0" fill="#fff"/>
+        <text x="70" y="183" font-size="12" fill="#0f0f0f" font-family="sans-serif">13+ unique styles</text>
+        <text x="140" y="183" text-anchor="middle" font-size="16" font-family="sans-serif">⚠️</text>
+        <text x="280" y="183" text-anchor="middle" font-size="16" font-family="sans-serif">✅</text>
+        <rect x="24" y="196" width="332" height="36" rx="0" fill="#f7f6f3"/>
+        <text x="70" y="219" font-size="12" fill="#0f0f0f" font-family="sans-serif">Real-time preview</text>
+        <text x="140" y="219" text-anchor="middle" font-size="16" font-family="sans-serif">⚠️</text>
+        <text x="280" y="219" text-anchor="middle" font-size="16" font-family="sans-serif">✅</text>
+        <rect x="24" y="232" width="332" height="36" rx="0" fill="#fff"/>
+        <text x="70" y="255" font-size="12" fill="#0f0f0f" font-family="sans-serif">Mobile-friendly</text>
+        <text x="140" y="255" text-anchor="middle" font-size="16" font-family="sans-serif">❌</text>
+        <text x="280" y="255" text-anchor="middle" font-size="16" font-family="sans-serif">✅</text>
+        <rect x="24" y="268" width="332" height="24" rx="0" fill="#0f0f0f"/>
+        <text x="190" y="284" text-anchor="middle" font-size="10" fill="rgba(255,255,255,.5)" font-family="sans-serif">No ads · No limits · No catch</text>
+      </svg>
+    </div>
+  </section>
+
+</div><!-- /btg-sections -->
+
+<!-- STATS -->
+<section class="btg-stats" aria-label="Tool statistics">
+  <div class="btg-stats-inner btg-reveal">
+    <div class="btg-stat"><div class="btg-stat-n">13<span>+</span></div><div class="btg-stat-l">Bold styles</div></div>
+    <div class="btg-stat"><div class="btg-stat-n">0<span>s</span></div><div class="btg-stat-l">Time to convert</div></div>
+    <div class="btg-stat"><div class="btg-stat-n">&infin;</div><div class="btg-stat-l">Free forever</div></div>
+    <div class="btg-stat"><div class="btg-stat-n">100<span>%</span></div><div class="btg-stat-l">Works everywhere</div></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="btg-faq" id="btg-faq" aria-labelledby="btg-faq-h2">
+  <div class="btg-faq-inner">
+    <div class="btg-faq-tag">FAQ</div>
+    <h2 class="btg-faq-h2" id="btg-faq-h2">Frequently Asked Questions</h2>
+    <div id="btgFaqList"></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="btg-cta" aria-label="Call to action">
+  <div class="btg-cta-inner btg-reveal">
+    <h2 class="btg-cta-h2">Start writing in <span style="color:var(--c-accent)">𝐁𝐨𝐥𝐝</span> today.</h2>
+    <p class="btg-cta-p">No signup. No downloads. Just instant bold text &mdash; free forever.</p>
+    <button class="btg-cta-btn" onclick="document.getElementById('btgInput').focus();document.getElementById('btgInput').scrollIntoView({behavior:'smooth'})">
+      ⚡ Generate Bold Text Free
+    </button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="btg-footer" role="contentinfo">
+  <div class="btg-footer-top">
+    <div class="btg-footer-brand">
+      <a href="#" class="btg-footer-logo">BoldGen</a>
+      <p>The fastest free bold text generator. Convert any text to Unicode bold styles instantly — copy and paste anywhere.</p>
+    </div>
+    <div class="btg-footer-col">
+      <h5>Tool</h5>
+      <a href="#btg-tool">Generator</a>
+      <a href="#btg-styles">All Styles</a>
+      <a href="#btg-how">How It Works</a>
+    </div>
+    <div class="btg-footer-col">
+      <h5>Styles</h5>
+      <a href="#btg-tool">Bold Serif</a>
+      <a href="#btg-tool">Bold Sans</a>
+      <a href="#btg-tool">Bold Italic</a>
+      <a href="#btg-tool">Script Bold</a>
+      <a href="#btg-tool">Fraktur</a>
+    </div>
+    <div class="btg-footer-col">
+      <h5>Help</h5>
+      <a href="#btg-faq">FAQ</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Use</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+  <div class="btg-footer-bottom">
+    <p>&copy; 2025 BoldGen. Free bold text generator.</p>
+    <div>
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">Cookies</a>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /btg-wrap -->
+
+<!-- ===================================================
+     JAVASCRIPT — deferred, minimal, no dependencies
+     =================================================== -->
+<script>
+(function(){
+'use strict';
+
+/* ── NAV scroll class ── */
+window.addEventListener('scroll', function(){
+  var n = document.getElementById('btgNav');
+  if(n) n.style.boxShadow = scrollY > 20 ? '0 2px 20px rgba(0,0,0,.08)' : '';
+}, {passive:true});
+
+/* ── REVEAL on scroll (IntersectionObserver) ── */
+var obs = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('vis'); obs.unobserve(e.target); } });
+},{threshold:0.08});
+document.querySelectorAll('.btg-reveal').forEach(function(el){ obs.observe(el); });
+
+/* ══════════════════════════════════════
+   UNICODE CONVERSION ENGINE
+══════════════════════════════════════ */
+var norm = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+function buildMap(chars){
+  var m={}, arr=[...chars];
+  [...norm].forEach(function(c,i){ m[c]=arr[i]||c; });
+  return m;
+}
+function conv(text,map){ return [...text].map(function(c){ return map[c]!==undefined?map[c]:c; }).join(''); }
+function combining(text,cc){ return [...text].map(function(c){ return c===' '?c:c+cc; }).join(''); }
+
+var maps={
+  serifBold:  buildMap('𝐀𝐁𝐂𝐃𝐄𝐅𝐆𝐇𝐈𝐉𝐊𝐋𝐌𝐍𝐎𝐏𝐐𝐑𝐒𝐓𝐔𝐕𝐖𝐗𝐘𝐙𝐚𝐛𝐜𝐝𝐞𝐟𝐠𝐡𝐢𝐣𝐤𝐥𝐦𝐧𝐨𝐩𝐪𝐫𝐬𝐭𝐮𝐯𝐰𝐱𝐲𝐳𝟎𝟏𝟐𝟑𝟒𝟓𝟔𝟕𝟖𝟗'),
+  sansBold:   buildMap('𝗔𝗕𝗖𝗗𝗘𝗙𝗚𝗛𝗜𝗝𝗞𝗟𝗠𝗡𝗢𝗣𝗤𝗥𝗦𝗧𝗨𝗩𝗪𝗫𝗬𝗭𝗮𝗯𝗰𝗱𝗲𝗳𝗴𝗵𝗶𝗷𝗸𝗹𝗺𝗻𝗼𝗽𝗾𝗿𝘀𝘁𝘂𝘃𝘄𝘅𝘆𝘇𝟬𝟭𝟮𝟯𝟰𝟱𝟲𝟳𝟴𝟵'),
+  boldItalic: buildMap('𝑨𝑩𝑪𝑫𝑬𝑭𝑮𝑯𝑰𝑱𝑲𝑳𝑴𝑵𝑶𝑷𝑸𝑹𝑺𝑻𝑼𝑽𝑾𝑿𝒀𝒁𝒂𝒃𝒄𝒅𝒆𝒇𝒈𝒉𝒊𝒋𝒌𝒍𝒎𝒏𝒐𝒑𝒒𝒓𝒔𝒕𝒖𝒗𝒘𝒙𝒚𝒛𝟎𝟏𝟐𝟑𝟒𝟓𝟔𝟕𝟖𝟗'),
+  sansItalic: buildMap('𝘼𝘽𝘾𝘿𝙀𝙁𝙂𝙃𝙄𝙅𝙆𝙇𝙈𝙉𝙊𝙋𝙌𝙍𝙎𝙏𝙐𝙑𝙒𝙓𝙔𝙕𝙖𝙗𝙘𝙙𝙚𝙛𝙜𝙝𝙞𝙟𝙠𝙡𝙢𝙣𝙤𝙥𝙦𝙧𝙨𝙩𝙪𝙫𝙬𝙭𝙮𝙯𝟎𝟏𝟐𝟑𝟒𝟓𝟔𝟕𝟖𝟗'),
+  script:     buildMap('𝓐𝓑𝓒𝓓𝓔𝓕𝓖𝓗𝓘𝓙𝓚𝓛𝓜𝓝𝓞𝓟𝓠𝓡𝓢𝓣𝓤𝓥𝓦𝓧𝓨𝓩𝓪𝓫𝓬𝓭𝓮𝓯𝓰𝓱𝓲𝓳𝓴𝓵𝓶𝓷𝓸𝓹𝓺𝓻𝓼𝓽𝓾𝓿𝔀𝔁𝔂𝔃𝟎𝟏𝟐𝟑𝟒𝟓𝟔𝟕𝟖𝟗'),
+  fraktur:    buildMap('𝕬𝕭𝕮𝕯𝕰𝕱𝕲𝕳𝕴𝕵𝕶𝕷𝕸𝕹𝕺𝕻𝕼𝕽𝕾𝕿𝖀𝖁𝖂𝖃𝖄𝖅𝖆𝖇𝖈𝖉𝖊𝖋𝖌𝖍𝖎𝖏𝖐𝖑𝖒𝖓𝖔𝖕𝖖𝖗𝖘𝖙𝖚𝖛𝖜𝖝𝖞𝖟𝟎𝟏𝟐𝟑𝟒𝟓𝟔𝟕𝟖𝟗'),
+  fullwidth:  buildMap('ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ０１２３４５６７８９'),
+};
+
+var cLow=['ⓐ','ⓑ','ⓒ','ⓓ','ⓔ','ⓕ','ⓖ','ⓗ','ⓘ','ⓙ','ⓚ','ⓛ','ⓜ','ⓝ','ⓞ','ⓟ','ⓠ','ⓡ','ⓢ','ⓣ','ⓤ','ⓥ','ⓦ','ⓧ','ⓨ','ⓩ'];
+var cUp =['Ⓐ','Ⓑ','Ⓒ','Ⓓ','Ⓔ','Ⓕ','Ⓖ','Ⓗ','Ⓘ','Ⓙ','Ⓚ','Ⓛ','Ⓜ','Ⓝ','Ⓞ','Ⓟ','Ⓠ','Ⓡ','Ⓢ','Ⓣ','Ⓤ','Ⓥ','Ⓦ','Ⓧ','Ⓨ','Ⓩ'];
+var sq  =['🅐','🅑','🅒','🅓','🅔','🅕','🅖','🅗','🅘','🅙','🅚','🅛','🅜','🅝','🅞','🅟','🅠','🅡','🅢','🅣','🅤','🅥','🅦','🅧','🅨','🅩'];
+var cMap={},sMap={};
+'abcdefghijklmnopqrstuvwxyz'.split('').forEach(function(c,i){cMap[c]=cLow[i];sMap[c]=sq[i];});
+'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').forEach(function(c,i){cMap[c]=cUp[i];sMap[c]=sq[i];});
+'0123456789'.split('').forEach(function(c){cMap[c]=c;sMap[c]=c;});
+
+var scM={A:'ᴀ',B:'ʙ',C:'ᴄ',D:'ᴅ',E:'ᴇ',F:'ꜰ',G:'ɢ',H:'ʜ',I:'ɪ',J:'ᴊ',K:'ᴋ',L:'ʟ',M:'ᴍ',N:'ɴ',O:'ᴏ',P:'ᴘ',Q:'Q',R:'ʀ',S:'ꜱ',T:'ᴛ',U:'ᴜ',V:'ᴠ',W:'ᴡ',X:'x',Y:'ʏ',Z:'ᴢ'};
+var scMap={};
+'abcdefghijklmnopqrstuvwxyz'.split('').forEach(function(c){scMap[c]=scM[c.toUpperCase()]||c;});
+'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').forEach(function(c){scMap[c]=scM[c]||c.toLowerCase();});
+'0123456789'.split('').forEach(function(c){scMap[c]=c;});
+
+var STYLES=[
+  {id:'serif-bold', cat:'bold',    label:'Serif Bold',       icon:'𝐀', preview:'𝐁𝐨𝐥𝐝', desc:'Classic Unicode mathematical bold. Perfect for formal emphasis on any platform.',        fn:function(t){return conv(t,maps.serifBold);}},
+  {id:'sans-bold',  cat:'sans',    label:'Sans-Serif Bold',  icon:'𝗔', preview:'𝗕𝗼𝗹𝗱', desc:'Clean modern sans-serif bold. Most popular for social media bios and posts.',           fn:function(t){return conv(t,maps.sansBold);}},
+  {id:'bold-italic',cat:'italic',  label:'Bold Italic',      icon:'𝑩', preview:'𝑩𝒐𝒍𝒅', desc:'Serif bold italic — dramatic emphasis with a slanted flair. Great for quotes.',         fn:function(t){return conv(t,maps.boldItalic);}},
+  {id:'sans-italic',cat:'italic',  label:'Sans Bold Italic', icon:'𝙃', preview:'𝙃𝙚𝙡𝙡𝙤',desc:'Modern sans-serif bold italic. Dynamic look for headlines and highlights.',            fn:function(t){return conv(t,maps.sansItalic);}},
+  {id:'script',     cat:'fancy',   label:'Script Bold',      icon:'𝓐', preview:'𝓑𝓸𝓵𝓭', desc:'Elegant cursive bold script. Ideal for Instagram bios and artistic captions.',         fn:function(t){return conv(t,maps.script);}},
+  {id:'fraktur',    cat:'serif',   label:'Fraktur Bold',     icon:'𝕭', preview:'𝕭𝖔𝖑𝖉', desc:'Medieval gothic blackletter. Eye-catching and distinctive for brand names.',           fn:function(t){return conv(t,maps.fraktur);}},
+  {id:'fullwidth',  cat:'special', label:'Full Width',       icon:'Ａ', preview:'Ｂｏｌｄ', desc:'Wide vaporwave aesthetic. Great for stylish usernames and aesthetic bios.',            fn:function(t){return conv(t,maps.fullwidth);}},
+  {id:'circled',    cat:'special', label:'Circled',          icon:'Ⓐ', preview:'Ⓑⓞⓛⓓ', desc:'Each letter enclosed in a circle. Playful, attention-grabbing for fun content.',        fn:function(t){return conv(t,cMap);}},
+  {id:'squared',    cat:'special', label:'Squared',          icon:'🅐', preview:'🅑🅞🅛🅓', desc:'Filled squares around each letter. High contrast, perfect for labels and tags.',       fn:function(t){return conv(t,sMap);}},
+  {id:'smallcaps',  cat:'special', label:'Small Caps',       icon:'ᴀ', preview:'ʙᴏʟᴅ', desc:'Elegant small capital letters. Professional look for LinkedIn and formal content.',     fn:function(t){return conv(t,scMap);}},
+  {id:'strike',     cat:'special', label:'Strikethrough',    icon:'A̶', preview:'B̶o̶l̶d̶', desc:'Text with a line through it. "Crossed out" effects in social media posts.',          fn:function(t){return combining(t,'\u0336');}},
+  {id:'underline',  cat:'bold',    label:'Underline',        icon:'A̲', preview:'B̲o̲l̲d̲', desc:'Underlined text using Unicode combining characters. Emphasis beyond standard bold.',  fn:function(t){return combining(t,'\u0332');}},
+  {id:'double',     cat:'fancy',   label:'Double-Struck',    icon:'𝔸', preview:'𝔹𝕠𝕝𝕕', desc:'Mathematical blackboard bold. Unique hollow-bold look popular on Twitter.',          fn:function(t){return conv(t,buildMap('𝔸𝔹ℂ𝔻𝔼𝔽𝔾ℍ𝕀𝕁𝕂𝕃𝕄ℕ𝕆ℙℚℝ𝕊𝕋𝕌𝕍𝕎𝕏𝕐ℤ𝕒𝕓𝕔𝕕𝕖𝕗𝕘𝕙𝕚𝕛𝕜𝕝𝕞𝕟𝕠𝕡𝕢𝕣𝕤𝕥𝕦𝕧𝕨𝕩𝕪𝕫𝟘𝟙𝟚𝟛𝟜𝟝𝟞𝟟𝟠𝟡'));}}
+];
+
+/* ── TICKER BUILD ── */
+(function(){
+  var samples=STYLES.map(function(s){return s.preview;});
+  var doubled=[...samples,...samples];
+  document.getElementById('btgTicker').innerHTML=doubled.map(function(s,i){
+    return '<span class="btg-tick-item'+(i%3===0?' hi':'')+'">'+s+'</span>';
+  }).join('');
+})();
+
+/* ── STYLES GRID BUILD ── */
+(function(){
+  var el=document.getElementById('btgStylesGrid');
+  if(!el) return;
+  el.innerHTML=STYLES.map(function(s){
+    return '<div class="btg-style-card"><div class="btg-sc-icon">'+s.icon+'</div><div class="btg-sc-name">'+s.label+'</div><div class="btg-sc-preview">'+s.preview+'</div><div class="btg-sc-desc">'+s.desc+'</div><div class="btg-sc-example"><div class="btg-sc-ex-label">Preview</div><div style="font-size:16px;color:#3a3530">'+s.fn('Bold Text')+'</div></div></div>';
+  }).join('');
+})();
+
+/* ── FILTER ── */
+var currentFilter='all';
+window.btgFilter=function(f,btn){
+  currentFilter=f;
+  document.querySelectorAll('.btg-fbtn').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  btgConvert();
+};
+
+/* ── CONVERT ── */
+function esc(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+window.btgConvert=function(){
+  var input=document.getElementById('btgInput').value;
+  document.getElementById('btgCharN').textContent=input.length;
+  var filtered=currentFilter==='all'?STYLES:STYLES.filter(function(s){return s.cat===currentFilter;});
+  document.getElementById('btgGrid').innerHTML=filtered.map(function(s){
+    var out=input?s.fn(input):'';
+    var empty=!input;
+    return '<div class="btg-card'+(empty?' empty':'')+'" id="btgCard-'+s.id+'" onclick="btgCopyStyle(\''+s.id+'\')" role="button" tabindex="0" aria-label="Copy '+s.label+' style"><div class="btg-card-label">'+s.label+'</div><div class="btg-card-text'+(empty?' empty':'')+'" id="btgTxt-'+s.id+'">'+(empty?'Your text will appear here&hellip;':esc(out))+'</div><div class="btg-card-foot"><span class="btg-badge">'+s.icon+'</span><button class="btg-copy" id="btgBtn-'+s.id+'" onclick="event.stopPropagation();btgCopyStyle(\''+s.id+'\')">📋 Copy</button></div></div>';
+  }).join('');
+};
+
+/* ── COPY ── */
+window.btgCopyStyle=function(id){
+  var input=document.getElementById('btgInput').value;
+  if(!input){document.getElementById('btgInput').focus();return;}
+  var s=STYLES.find(function(x){return x.id===id;}); if(!s) return;
+  btgDoCopy(s.fn(input));
+  var card=document.getElementById('btgCard-'+id), btn=document.getElementById('btgBtn-'+id);
+  if(card) card.classList.add('copied');
+  if(btn){btn.textContent='✓ Copied!';btn.classList.add('copied');}
+  setTimeout(function(){
+    if(card) card.classList.remove('copied');
+    if(btn){btn.innerHTML='📋 Copy';btn.classList.remove('copied');}
+  },2000);
+};
+
+function btgDoCopy(text){
+  navigator.clipboard.writeText(text).then(function(){btgToast('Copied to clipboard!');}).catch(function(){
+    var ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();
+    document.execCommand('copy');document.body.removeChild(ta);btgToast('Copied!');
+  });
+}
+function btgToast(msg){
+  var t=document.getElementById('btgToast');document.getElementById('btgToastMsg').textContent=msg;
+  t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2500);
+}
+
+/* ── FAQ ── */
+var faqs=[
+  {q:'How do I make my font bold?',a:'Type your text into the input box at the top of this page. The generator instantly converts it into 13+ bold Unicode styles. Click Copy on any style card and paste the result anywhere — Instagram, Twitter, Facebook, WhatsApp, email, or any other platform. No formatting tools or HTML knowledge required.'},
+  {q:'Why are bold fonts important?',a:'Bold fonts create visual hierarchy, guide the reader\'s eye to key information, and improve readability in long-form content. On social media, bold text helps posts stand out in fast-scrolling feeds. Research consistently shows that posts with visual contrast outperform plain-text alternatives in engagement.'},
+  {q:'Are bold fonts easier to read?',a:'In moderate use, yes. Bold increases contrast and visual weight, making key phrases easier to spot at a glance. Overusing bold — making entire paragraphs bold — can reduce readability by eliminating contrast. Use it selectively to highlight the most critical words or phrases.'},
+  {q:'What does the bold font style make the text?',a:'Bolding makes text heavier, darker, and more prominent than surrounding regular text. It signals importance, a key term, or a call to action. In Unicode bold, characters are mathematically distinct code points, so they carry their boldness wherever pasted — even in plain-text environments that strip HTML.'},
+  {q:'When should you use bold words?',a:'Use bold for key terms, important statistics, calls to action, headings, and critical warnings. It\'s especially effective at the start of bullet points, in social media bios, in email subject lines, and anywhere you need a reader to immediately notice specific information. Avoid bolding entire paragraphs — reserve it for the words that truly need emphasis.'},
+];
+document.getElementById('btgFaqList').innerHTML=faqs.map(function(f,i){
+  return '<div class="btg-faq-item" id="btgFq'+i+'"><div class="btg-faq-q" onclick="btgToggleFaq('+i+')" role="button" aria-expanded="false" tabindex="0">'+f.q+'<span class="btg-faq-icon" aria-hidden="true">+</span></div><div class="btg-faq-a" role="region">'+f.a+'</div></div>';
+}).join('');
+
+window.btgToggleFaq=function(i){
+  var el=document.getElementById('btgFq'+i), was=el.classList.contains('open');
+  document.querySelectorAll('.btg-faq-item').forEach(function(f){f.classList.remove('open');});
+  if(!was) el.classList.add('open');
+};
+
+/* ── INIT ── */
+btgConvert();
+
+})();
+</script>
+
+<!-- Schema Markup for SEO — WordPress/Kadence compatible -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Bold Text Generator",
+  "url": "https://yourdomain.com/bold-text-generator/",
+  "description": "Free bold text generator. Convert any text to Unicode bold, italic, serif bold, sans-serif bold, and more. Copy and paste bold text for Instagram, Facebook, Twitter, WhatsApp and more.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "featureList": [
+    "13+ Unicode bold text styles",
+    "Real-time conversion",
+    "One-click copy",
+    "Works on all platforms",
+    "No signup required"
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"How do I make my font bold?","acceptedAnswer":{"@type":"Answer","text":"Type your text into the bold text generator input box. It instantly converts to 13+ bold Unicode styles. Click Copy and paste anywhere — Instagram, Twitter, Facebook, WhatsApp, email, or any platform."}},
+    {"@type":"Question","name":"Why are bold fonts important?","acceptedAnswer":{"@type":"Answer","text":"Bold fonts create visual hierarchy, guide readers to key information, and improve readability. On social media, bold text helps posts stand out in fast-scrolling feeds and drives higher engagement."}},
+    {"@type":"Question","name":"Are bold fonts easier to read?","acceptedAnswer":{"@type":"Answer","text":"In moderate use, yes. Bold text increases contrast and makes key phrases easier to spot. Use it selectively for maximum effect — avoid bolding entire paragraphs."}},
+    {"@type":"Question","name":"What does the bold font style make the text?","acceptedAnswer":{"@type":"Answer","text":"Bold text appears heavier, darker, and more prominent than regular text. Unicode bold uses distinct code points that carry their boldness in any plain-text field, even where HTML formatting is stripped."}},
+    {"@type":"Question","name":"When should you use bold words?","acceptedAnswer":{"@type":"Answer","text":"Use bold for key terms, statistics, calls to action, and critical information. Effective in social media bios, email subject lines, and bullet points. Reserve it for words that truly need emphasis."}}
+  ]
+}
+</script>
+
+</body>
+</html>
